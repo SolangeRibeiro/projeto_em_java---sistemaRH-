@@ -30,8 +30,8 @@ public class Funcionario {
     }
 
     public void setNome(String nome) {
-        // Impede nome vazio
-        if (nome == null || nome.isBlank()) {
+        if (nome == null || nome.isBlank())  // Impede nome vazio
+    {
             throw new IllegalArgumentException("Nome não pode ser vazio.");
         }
         this.nome = nome;
@@ -42,8 +42,8 @@ public class Funcionario {
     }
 
     public void setCpf(String cpf) {
-        // Valida se possui exatamente 11 números
-        if (cpf == null || !cpf.matches("\\d{11}")) {
+        if (cpf == null || !cpf.matches("\\d{11}")) // Valida se possui exatamente 11 números 
+    {
             throw new IllegalArgumentException("CPF inválido! Deve conter exatamente 11 dígitos numéricos.");
         }
         this.cpf = cpf;
@@ -54,8 +54,8 @@ public class Funcionario {
     }
 
     public void setSalarioBase(double salarioBase) {
-        // Impede salário negativo
-        if (salarioBase < 0) {
+        if (salarioBase < 0) // Impede salário negativo
+    {
             throw new IllegalArgumentException("O salário base não pode ser negativo.");
         }
         this.salarioBase = salarioBase;

@@ -8,18 +8,18 @@ public class Main {
 
     public static void main(String[] args) {
 
-        SistemaRH sistema = new SistemaRH(); // cria o gerenciador
-        Scanner sc = new Scanner(System.in);  // para ler teclado
+        SistemaRH sistema = new SistemaRH(); // gerencia os funcionarios
+        Scanner sc = new Scanner(System.in);  // recebe dados digitados
         int opcao = 0; // guarda opção escolhida
 
-        sistema.carregarDoArquivo("funcionarios.txt"); // carrega registros
+        sistema.carregarDoArquivo("funcionarios.txt"); // carrega os registros salvos no txt
 
         System.out.println("BEM-VINDO AO SISTEMA DE GESTÃO DE RH!");
 
-        while (opcao != 7)  // Loop do menu
+        while (opcao != 7)  // Loop do menu ate clicar 7
         {
 
-            exibirMenu(); // mostra opções
+            exibirMenu(); // mostra as opções
 
             try {
                 System.out.print("Escolha uma opção: ");
@@ -28,31 +28,31 @@ public class Main {
 
                 switch (opcao) {
 
-                    case 1:
+                    case 1:  //cadastra o funcionario
                         cadastrarFuncionario(sc, sistema);
                         break;
 
-                    case 2:
+                    case 2:  //remove o funcionario
                         removerFuncionario(sc, sistema);
                         break;
 
-                    case 3:
+                    case 3:  //lista os funcionarios
                         sistema.listarFuncionarios();
                         break;
 
-                    case 4:
+                    case 4:  //consulta o funcionario
                         consultarFuncionario(sc, sistema);
                         break;
 
-                    case 5:
+                    case 5:  //calcula a folha de pagamento
                         calcularFolha(sistema);
                         break;
 
-                    case 6:
+                    case 6:  //lista por cargo
                         listarPorCargo(sc, sistema);
                         break;
 
-                    case 7:
+                    case 7:  //sai do sistema e cadastra no banco
                         System.out.println("Saindo do sistema. Salvando dados...");
                         sistema.salvarEmArquivo("funcionarios.txt");
                         break;
@@ -61,18 +61,19 @@ public class Main {
                         System.out.println("Opção inválida.");
                 }
 
+                //captura um erro quando o usuário digita um tipo de dado errado
             } catch (InputMismatchException e) {
                 System.err.println("ERRO: Digite apenas números.");
                 sc.nextLine(); // limpa entrada errada
             }
         }
 
-        sc.close(); // encerra scanner
+        sc.close(); // encerra o scanner
     }
 
     // Mostra menu
     private static void exibirMenu() {
-        System.out.println("\n======= MENU =======");
+        System.out.println("\n MENU ");
         System.out.println("1. Cadastrar Novo Funcionário");
         System.out.println("2. Remover Funcionário");
         System.out.println("3. Listar Funcionários");
@@ -80,7 +81,6 @@ public class Main {
         System.out.println("5. Calcular Folha");
         System.out.println("6. Listar por Cargo");
         System.out.println("7. Sair");
-        System.out.println("====================");
     }
 
     // Cadastrar funcionário

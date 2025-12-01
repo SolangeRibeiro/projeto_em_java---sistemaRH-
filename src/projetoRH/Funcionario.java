@@ -15,13 +15,13 @@ public class Funcionario {
     }
 
     // Formata o CPF colocando pontos e traço (nao esta funcionando)
-    public String formatarCPF() {
-        if (cpf == null || cpf.length() != 11) return cpf; // Se estiver errado, retorna normal
+    // public String formatarCPF() {
+    //    if (cpf == null || cpf.length() != 11) return cpf; // Se estiver errado, retorna normal
 
-        return cpf.substring(0, 3) + "." +
-                cpf.substring(3, 6) + "." +
-                cpf.substring(6, 9) + "-" +
-                cpf.substring(9, 11);
+    //    return cpf.substring(0, 3) + "." +
+     //           cpf.substring(3, 6) + "." +
+       //         cpf.substring(6, 9) + "-" +
+         //       cpf.substring(9, 11);
     }
 
     //GETTERS E SETTERS

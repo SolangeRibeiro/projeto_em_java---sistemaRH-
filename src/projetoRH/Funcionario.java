@@ -1,6 +1,7 @@
 package projetoRH; // Pacote onde a classe está
 
-public class Funcionario {
+public class Funcionario  //classe mãe
+{
 
     // Atributos básicos do funcionário
     private String nome;
@@ -14,15 +15,15 @@ public class Funcionario {
         setSalarioBase(salarioBase);
     }
 
-    // Formata o CPF colocando pontos e traço (nao esta funcionando)
-    // public String formatarCPF() {
-    //    if (cpf == null || cpf.length() != 11) return cpf; // Se estiver errado, retorna normal
+    // Formata o CPF colocando pontos e traços
+    public String formatarCPF() {
+        if (cpf == null || cpf.length() != 11) return cpf; // Se estiver errado, retorna normal
 
-    //    return cpf.substring(0, 3) + "." +
-     //           cpf.substring(3, 6) + "." +
-       //         cpf.substring(6, 9) + "-" +
-         //       cpf.substring(9, 11);
-    }
+        return cpf.substring(0, 3) + "." +
+                cpf.substring(3, 6) + "." +
+                cpf.substring(6, 9) + "-" +
+                cpf.substring(9, 11);
+   }
 
     //GETTERS E SETTERS
     public String getNome() {
@@ -30,8 +31,8 @@ public class Funcionario {
     }
 
     public void setNome(String nome) {
-        if (nome == null || nome.isBlank())  // Impede nome vazio
-    {
+        // Impede nome vazio
+        if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("Nome não pode ser vazio.");
         }
         this.nome = nome;
@@ -42,8 +43,8 @@ public class Funcionario {
     }
 
     public void setCpf(String cpf) {
-        if (cpf == null || !cpf.matches("\\d{11}")) // Valida se possui exatamente 11 números 
-    {
+        // Valida se possui exatamente 11 números
+        if (cpf == null || !cpf.matches("\\d{11}")) {
             throw new IllegalArgumentException("CPF inválido! Deve conter exatamente 11 dígitos numéricos.");
         }
         this.cpf = cpf;
@@ -54,8 +55,8 @@ public class Funcionario {
     }
 
     public void setSalarioBase(double salarioBase) {
-        if (salarioBase < 0) // Impede salário negativo
-    {
+        // Impede salário negativo
+        if (salarioBase < 0) {
             throw new IllegalArgumentException("O salário base não pode ser negativo.");
         }
         this.salarioBase = salarioBase;
@@ -74,7 +75,7 @@ public class Funcionario {
     }
 
     // Como o funcionário aparece na listagem
-    @Override
+    @Override  //sobrescreve um metodo da classe mãe
     public String toString() {
         return "Nome: " + nome +
                 " | CPF: " + formatarCPF() +

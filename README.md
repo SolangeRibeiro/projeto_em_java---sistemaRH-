@@ -123,4 +123,4 @@ Cada linha representa um funcionário, seguindo o modelo:
 
 
 
-Isso garante um método de armazenamento simples, legível e independente de banco de dados, ideal para fins acadêmicos e testes iniciais.
+Isso garante um método de armazenamento simples, legível e independente de banco de dados.

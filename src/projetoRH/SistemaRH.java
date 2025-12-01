@@ -10,22 +10,23 @@ public class SistemaRH {
 
     // salva os funcionarios no txt
     public void salvarEmArquivo(String caminho) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho))) //escreve linha por linha
+        {
 
-            // Grava cada funcionário em uma linha
+            // percorre todos funcionarios
             for (Funcionario f : funcionarios) {
 
-                String cargo = f.getClass().getSimpleName(); // pega o tipo (Analista, Assistente...)
+                String cargo = f.getClass().getSimpleName(); // pega o tipo
                 double salarioBase = f.getSalarioBase();
 
                 String extra1 = ""; // dado extra (área ou horas)
                 String extra2 = ""; // não usado, mas mantido para compatibilidade
 
                 if (f instanceof Analista) {
-                    extra1 = ((Analista) f).getArea();
+                    extra1 = ((Analista) f).getArea(); //se for analista salva a area
                 }
                 if (f instanceof Assistente) {
-                    extra1 = String.valueOf(((Assistente) f).getHorasExtras());
+                    extra1 = String.valueOf(((Assistente) f).getHorasExtras()); //se for assistente salva hora extra
                 }
 
                 // Salva tudo separado por ponto e vírgula
@@ -48,7 +49,8 @@ public class SistemaRH {
     }
 
     // carrega todos funcionarios armazenados no txt
-    public void carregarDoArquivo(String caminho) {
+    public void carregarDoArquivo(String caminho) //le o arquivo e reconstroi os objetos
+    {
 
         File arquivo = new File(caminho);
 
@@ -62,12 +64,13 @@ public class SistemaRH {
 
             String linha;
 
-            while ((linha = br.readLine()) != null) {
+            while ((linha = br.readLine()) != null) //le linha por linha
+            {
 
                 String[] partes = linha.split(";"); // divide cada campo pelo ;
 
-                if (partes.length < 4) continue; // linha inválida → ignora
-
+                if (partes.length < 4) continue; // linha inválida
+                //converte os campos
                 String nome = partes[0];
                 String cpf = partes[1];
                 String cargo = partes[2];
@@ -76,7 +79,7 @@ public class SistemaRH {
 
                 Funcionario f;
 
-                // Dependendo do cargo, recria o objeto correto
+                // Dependendo do cargo, recria o objeto correto (polimorfismo reverso)
                 switch (cargo.toLowerCase()) {
                     case "analista":
                         f = new Analista(nome, cpf, salarioBase, extra);
@@ -97,24 +100,26 @@ public class SistemaRH {
                         break;
                 }
 
-                // Adiciona na lista
-                funcionarios.add(f);
+                funcionarios.add(f); // Adiciona na lista
             }
 
             System.out.println("Funcionários carregados!");
 
+            //capturar um erro quando o usuário digita um tipo de dado errado
         } catch (Exception e) {
             System.out.println("ERRO AO LER ARQUIVO: " + e.getMessage());
         }
     }
 
     // MÉTODOS DO SISTEMA
-    public void adicionarFuncionario(Funcionario funcionario) {
+    public void adicionarFuncionario(Funcionario funcionario) //coloca o funcionario na lista
+    {
         funcionarios.add(funcionario);
         System.out.println("Funcionário adicionado: " + funcionario.getNome());
     }
 
-    public boolean removerFuncionario(String cpf) {
+    public boolean removerFuncionario(String cpf) //remove o funcionario da lista pelo cpf
+    {
 
         for (Funcionario f : funcionarios) {
             if (f.getCpf().equals(cpf)) {
@@ -128,7 +133,8 @@ public class SistemaRH {
         return false;
     }
 
-    public Funcionario buscarFuncionario(String cpf) {
+    public Funcionario buscarFuncionario(String cpf)
+    {
         for (Funcionario f : funcionarios)  // Busca um funcionário pelo CPF
         {
             if (f.getCpf().equals(cpf)) {
@@ -138,20 +144,22 @@ public class SistemaRH {
         return null;
     }
 
-    public void listarFuncionarios() {
+    public void listarFuncionarios()  //lista os funcionarios
+    {
 
         if (funcionarios.isEmpty()) {
             System.out.println("Nenhum funcionário cadastrado.");
             return;
         }
 
-        System.out.println("---- LISTA DE FUNCIONÁRIOS ----");
+        System.out.println("LISTA DE FUNCIONÁRIOS:");
 
         for (Funcionario f : funcionarios) {
             System.out.println(f); // usa o toString()
         }
     }
 
+    //soma os salarios dos funcionarios de acordo com o cargo (polimorfismo)
     public double calcularFolhaPagamento() {
         double total = 0;
 
@@ -162,9 +170,10 @@ public class SistemaRH {
         return total;
     }
 
+    //lista por cargos
     public void listarPorCargo(String cargo) {
 
-        System.out.println("---- Funcionários do cargo: " + cargo + " ----");
+        System.out.println("Funcionários do cargo: " + cargo + " ");
 
         boolean encontrado = false;
 
